@@ -1,24 +1,46 @@
-import logo from './logo.svg';
+
 import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import Navbar from "./components/Navbar/Navbar";
+import Products from "./components/Products/Products";
+import Footer from './components/Footer/Footer';
+import Cart from './components/Cart/Cart';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AboutPage from './components/AboutPage/AboutPage';
+import SingleProduct from './components/SingleProduct/SingleProduct';
+import Homepage from './components/HomePage/Homepage';
+import {CartProvider} from "react-use-cart"
 
 function App() {
   return (
+    
+      
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CartProvider>
+      <Router>
+        <Navbar/>
+         <Switch>
+          <Route path="/">
+            <Homepage/>
+          </Route>
+        <Route path="/about">
+            <AboutPage />
+          </Route>
+          <Route path="/products">
+            <Products />
+          </Route>
+          <Route path="/singleProduct">
+            <SingleProduct />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+      </Switch> 
+      <Footer/>
+    </Router>
+    </CartProvider>
     </div>
+    
   );
 }
 
